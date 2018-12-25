@@ -11,8 +11,8 @@ connectionManager.connect()
 //scales the players canvas to fit the screen
 resizeCanvas();
 
-const playerKeys = [
-  {
+const playerKeys = [ //object that maps the gameplay keys with its values i ascii table
+  {                 // later we can use the a s d w keys to play as well
     left: 37//65,// coresponds with a
     right: 39 //68, // d
     down: 40//83,// s

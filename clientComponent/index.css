@@ -5,7 +5,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Audiowide', cursive;
-  background: linear-gradient(45deg, #2c43d6 2%,#2c43d6 14%,#2da8d8 40%,#35d6ff 51%,#e3f5ab 84%,#f8ffe8 100%);
+  background: lightblue; /*linear-gradient(45deg, #2c43d6 2%,#2c43d6 14%,#2da8d8 40%,#35d6ff 51%,#e3f5ab 84%,#f8ffe8 100%);*/
 }
 
 #logoFlexBox {

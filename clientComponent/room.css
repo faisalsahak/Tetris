@@ -2,7 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(45deg, #2c43d6 2%,#2c43d6 14%,#2da8d8 40%,#35d6ff 51%,#e3f5ab 84%,#f8ffe8 100%);
+  background-color: lightblue; /*linear-gradient(45deg, #2c43d6 2%,#2c43d6 14%,#2da8d8 40%,#35d6ff 51%,#e3f5ab 84%,#f8ffe8 100%);*/
   font-family: 'Audiowide', cursive;
 
 }
@@ -148,7 +148,7 @@ span {
   align-items: center;
   justify-content: space-around;
   border-radius: 5px;
-  background-color: rgba(84, 84, 255, .35);
+  background-color: lightblue;/*rgba(84, 84, 255, .35);*/
   box-shadow: inset 0px 0px 19px -1px rgba(0,0,0,0.4);
 }
 

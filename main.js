@@ -3,8 +3,8 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const path = require('path');
-const Session = require('./components/Session');
-const Client = require('./components/Client');
+const Session = require('./gameComponent/Session');
+const Client = require('./gameComponent/Client');
 const port = 9000; //development port
 // const port = process.env.PORT; //PRODUCTION
 
@@ -104,6 +104,89 @@ function createClient(socket, id = generateRandomId()) {
 }
 
 
+
+function broadcastSession(session) {
+  //extract all clients into new array using spread operator
+  const clients = [...session.clients] || []; //To avoid server crash if there are no clients
+  clients.forEach( client => {
+    client.send({
+      type: 'sessionBroadcast',
+      peers: {
+        //Receiving client will self-identify with 'you'
+        you: client.id,
+        //object of all client ids and current state
+        clients: clients.map(client => {
+          return {
+            id: client.id,
+            state: client.state
+          }
+        })
+      }
+    })
+  })
+
+  //This will update the DB when implemented to track rooms and occupants
+  parseMapForDB(sessionsMap);
+}
+
+
+function gameRoom (io, socket) {
+
+  const client = createClient(socket);
+
+  socket.on('message', (packet) => {
+    const data = JSON.parse(packet);
+
+  //######## gameRoom Socket Logic ######################
+
+    if(data.type === 'createSession'){
+
+      console.log('Creating Session')
+
+      const session = createSession(generateRandomId()); //could also just use socket id?
+      session.join(client);
+
+      client.send({
+        type: 'sessionCreated',
+        id: session.id,
+      });
+    }
+
+    else if (data.type === 'joinSession') {
+
+      console.log('Client joined session')
+
+      const session = sessionsMap.get(data.id) || createSession(data.id);
+      session.join(client);
+
+      //Update clients with new player joined to session
+      broadcastSession(session);
+    }
+
+    else if (data.type === 'clientUpdate') {
+      //Receive state updates from clients
+      client.state[data.key] = data.state;
+      client.broadcast(data)
+    }
+  });
+
+  socket.on('disconnect', () => {
+
+    console.log('Client disconnected from session');
+
+    const session = client.session;
+    if(session) {
+      session.leave(client);
+      if(session.clients.size === 0) {
+        sessionsMap.delete(session.id)
+      }
+    }
+
+    //update clients when a player disconnects
+    broadcastSession(session);
+  })
+
+}
 
 
 

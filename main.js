@@ -14,7 +14,7 @@ const sessionsMap = new Map;
 
 
 //default viws directory for the server to retrieve static files to serve
-app.use(express.static(path.join(__dirname, '/client')));
+app.use(express.static(path.join(__dirname, '/clientComponent')));
 
 
 app.get('/', (req, res) => {
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/room', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/room.html'));
+  res.sendFile(path.join(__dirname, '/clientComponent/room.html'));
 });
 
 app.get('/menu-update', function (req, res) {

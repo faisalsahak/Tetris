@@ -2,7 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: lightblue; /*linear-gradient(45deg, #2c43d6 2%,#2c43d6 14%,#2da8d8 40%,#35d6ff 51%,#e3f5ab 84%,#f8ffe8 100%);*/
+  background-color: lightblue;
   font-family: 'Audiowide', cursive;
 
 }
@@ -28,7 +28,7 @@ span {
   align-items: center;
   justify-content: center;
 }
-
+/*TODO: double check when the server is running*/
 .textBox-left {
   height: 95%;
   width: 33%;
@@ -45,7 +45,6 @@ span {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /*flex-grow: 2;*/
   color: #FFEC92;
   font-size: 1.3rem;
 }
@@ -85,7 +84,7 @@ span {
 .quitButtonContainer {
   height: 10%;
 }
-
+/*TODO make the button smaller*/
 .quitButton {
   position: relative;
   padding: 8px 30px;
@@ -95,9 +94,6 @@ span {
   font-size: 25px;
   color: #FFF;
   text-decoration: none;
-  /*background-color: #F2CF66;
-  border-bottom: 5px solid #D1B358;
-  text-shadow: 0px -2px #D1B358;*/
   background-color: #F0BB18;
   border-bottom: 5px solid #B99116;
   text-shadow: 0px -2px #B99116;
@@ -123,6 +119,7 @@ span {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
+/*TODO: fix when chatbox is added*/
 #chatBox {
   height: 100%;
   width: 33%;
@@ -148,7 +145,7 @@ span {
   align-items: center;
   justify-content: space-around;
   border-radius: 5px;
-  background-color: lightblue;/*rgba(84, 84, 255, .35);*/
+  background-color: lightblue;
   box-shadow: inset 0px 0px 19px -1px rgba(0,0,0,0.4);
 }
 

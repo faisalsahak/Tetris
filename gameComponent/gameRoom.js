@@ -4,7 +4,7 @@ function gameRoom (io, socket) {
 
   socket.on('message', (packet) => {
     const data = JSON.parse(packet);
-
+    // when a session is created
     if(data.type === 'createSession'){
 
       console.log('Creating Session')
@@ -17,7 +17,7 @@ function gameRoom (io, socket) {
         id: session.id,
       });
     }
-
+    //
     else if (data.type === 'joinSession') {
 
       console.log('Client joined session')

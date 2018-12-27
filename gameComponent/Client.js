@@ -3,7 +3,7 @@ class Client {
     this.socket = socket;
     this.id = id;
     this.session = null;
-
+    //maintains the state of a users board
     this.state = {
       boardMatrix: [],
       activePieceMatrix: [],
@@ -15,7 +15,7 @@ class Client {
       pauseStatus: false,
     }
   }
-
+  //if a session is in progress or exists
   broadcast(data) {
 
     if(!this.session) {
@@ -28,7 +28,7 @@ class Client {
       .filter(client => client !== this)
       .forEach(client => client.send(data))
   }
-
+  //boradcasts the messege
   send(data) {
     // console.log('Sending message', data.type);
     const packet = JSON.stringify(data)

@@ -70,6 +70,28 @@ class Game {
     }
   }
 
+  pause() {
+    this.paused = !this.paused;
+    this.player.eventHandler.emit('pauseStatus', this.paused)
+  }
+
+  drawPaused() {
+    let ctx = this.props.ctx;
+    ctx.fillStyle = 'rgba(100,100,150, .85)';
+    ctx.fillRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE)
+    ctx.strokeStyle = 'white';
+    ctx.strokeRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE);
+    canvasText(ctx, 'PAUSED', 'Audiowide', '25px', 6 * this.props.TILESIZE, 10.5 * this.props.TILESIZE, 80, 'white', 'center')
+  }
+
+  drawDead() {
+    let ctx = this.props.ctx;
+    ctx.fillStyle = 'rgba(100,100,150, .85)';
+    ctx.fillRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE)
+    ctx.strokeStyle = 'white';
+    ctx.strokeRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE);
+    canvasText(ctx, 'GAME OVER', 'Audiowide', '60px', 6 * this.props.TILESIZE, 11 * this.props.TILESIZE, 180, 'white', 'center')
+  }
 
 
 }

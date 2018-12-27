@@ -93,5 +93,72 @@ class Game {
     canvasText(ctx, 'GAME OVER', 'Audiowide', '60px', 6 * this.props.TILESIZE, 11 * this.props.TILESIZE, 180, 'white', 'center')
   }
 
+  //requestAnimationFrame returns callback with single argument of timestamp
+  //On first run through needs to have a placeholder of 0
+  run(time = 0) {
+
+    //This is an attempt to stop the glitching where localInstances of copies are automatically drawing drops between
+    //remote updates
+    //Note: It's not working. Perhaps I'm broadcasting redundantly instead. But this may still cut down on a bit cycles on the
+    //local client
+    if(this.props.isLocal) {
+
+      //Allow the game to speed up incrementally based on current level (Maxes at 10)
+      this.dropInterval = this.DROP_INIT * this.speedModifier;
+
+      const deltaTime = time - this.lastTime;
+      this.lastTime = time;
+      this.dropCounter += deltaTime;
+      if(!this.paused) {
+        if (this.dropCounter > this.dropInterval) {
+          if(!this.player.isDead) {
+            //This last IF is because the program was running initially without a board or piece to merge and throwing an error
+            if(this.player.board.matrix.length && this.player.activePiece.matrix !== undefined) {
+
+              this.player.dropPiece();
+              this.dropCounter = 0;
+            }
+          }
+        }
+      }
+      requestAnimationFrame(this.run);
+    }
+    this.updateDropInterval()
+    this.draw();
+
+  }
+
+  updateDropInterval() {
+    // if (player.linesCleared) <- Could add handling only in this case for efficiency
+    this.speedModifier = .8 - (this.player.level * 0.07);
+  }
+
+  sendLocalState() {
+    //Send local state to server to broadcast to all other players
+    return {
+      board: this.player.board.matrix,
+      activePieceMatrix: this.player.activePiece.matrix,
+      activePiecePos: this.player.activePiece.pos,
+      nextPieceMatrix: this.player.nextPiece.matrix,
+      score: this.player.score,
+      linesCleared: this.player.linesCleared,
+      pauseStatus: this.paused,
+      level: this.player.level,
+    }
+  }
+
+  receiveRemoteState(state) {
+    //Update local copies of remote instance's state
+
+    this.player.board.matrix = Object.assign(state.boardMatrix);
+    this.player.activePiece.matrix = Object.assign(state.activePieceMatrix);
+    this.player.activePiece.pos = Object.assign(state.activePiecePos);
+    this.player.nextPiece.matrix = Object.assign(state.nextPieceMatrix);
+    this.player.score = state.score;
+    this.player.linesCleared = state.linesCleared;
+    this.player.level = state.level;
+    this.paused = state.pauseStatus;
+    this.draw();
+  }
 
 }

@@ -5,31 +5,31 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Audiowide', cursive;
-  background: lightblue;
+  /*background: lightblue;*/
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 #logoFlexBox {
   height: 20%;
   width: 100%;
-  display: flex;
+  /*display: flex;*/
+  display: inline-block;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-#tetrisLogo {
-  height: 80%;
-}
 
 #menuContainer {
   height: 60%;
-  width: 70%;
-  display: block;
-  margin: auto;
+  width: 25%;
+  display: inline-block;
+  /*margin: auto;*/
+  margin-left: 20px;
   overflow-y: scroll;
   background-color: rgba(198,198,233, 0.4);
   color: #333;
-  font-size: 25px;
+  font-size: 15px;
   border: 5px solid rgba(198,198,233, 0.2);
   border-radius: 5px;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -50,7 +50,8 @@ html, body {
 }
 
 .roomContainer {
-  display: flex;
+  /*display: flex;*/
+  display: inline-block;
   flex-direction: row;
   margin: 10px;
   align-items: center;
@@ -68,13 +69,15 @@ html, body {
 
 .roomPop {
   width: 20%;
-  display: flex;
+  /*display: flex;*/
+  display: inline-block;
   justify-content: center;
 }
 
 .roomLink {
-  width: 20%;
-  display: flex;
+  width: 10%;
+  /*display: flex;*/
+  display: inline-block;
   justify-content: center;
 }
 
@@ -101,12 +104,14 @@ html, body {
 }
 
 .full-button {
+  /*top: 10px;*/
+  left: 140px;
   position: relative;
-  padding: 5px 20px;
+  padding: 5px 10px;
   margin: 0px 5px 5px 0px;
   float: left;
   border-radius: 5px;
-  font-size: 25px;
+  font-size: 15px;
   color: #FFF;
   text-decoration: none;
   background-color: #FF2B2B;
@@ -115,31 +120,148 @@ html, body {
   -webkit-transition: all 0.1s;
 }
 
-#newRoomContainer {
+/*#newRoomContainer {
   height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+}*/
+
 /*TODO:: change the button to a more smaller version*/
-.action-button {
+
+
+/*.newRoomButton {
   position: relative;
-  padding: 10px 40px;
+  top: -400px;
+  left: 410px;
   margin: 0px 10px 10px 0px;
-  float: left;
-  border-radius: 10px;
-  font-size: 45px;
-  color: #FFF;
-  text-decoration: none;
+  font-size: 25px;
   background-color: #F0BB18;
-  border-bottom: 5px solid #B99116;
-  text-shadow: 0px -2px #B99116;
-  transition: all 0.1s;
-  -webkit-transition: all 0.1s;
+}*/
+
+
+/* START OF THE NEW GAME BUTTON*/
+
+.newRoomButton{
+  position:relative;
+  top: -400px;
+  left: 410px;
+  /*background:#1AAB8A;*/
+  color:#fff;
+  /*border:none;*/
+  height:50px;
+  font-size:1.6em;
+
+  /*padding: 10px 40px;*/
+  border-radius: 10px;
+  text-decoration: none;
+  /*padding:0 2em;*/
+  /*cursor:pointer;*/
+  transition:800ms ease all;
+  /*outline:none;*/
+
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: 0;
+  -webkit-appearance: none;
 }
 
+/* Custom */
+.newRoomButton {
+  display: inline-block;
+  position: relative;
+  padding: 10px 15px;
+  top: -475px;
+  font-size: 30px;
+  font-family: "Open Sans", Helvetica;
+  border-radius: 4px;
+  border-bottom: 0px solid rgba( 28, 227, 125, 0.5 );
+  background: rgba( 22, 230, 137, 1 );
+  color: #fff;
+  box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
+
+  -webkit-transform: translateZ(0);
+     -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+          transform: translateZ(0);
+
+  -webkit-transition: all 0.2s ease;
+     -moz-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+}
+
+.newRoomButton:hover {
+  top: -475px;
+  box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+
+  -webkit-transform: rotateX(20deg);
+     -moz-transform: rotateX(20deg);
+      -ms-transform: rotateX(20deg);
+          transform: rotateX(20deg);
+}
+
+.newRoomButton:active {
+  top: -475px;
+  box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+  background: rgba( 20, 224, 133, 1 );
+}
+/* END OF THE NEW GAME WINDOW BUTTON*/
+
+
+/* START OF THE GAME-IN-SESSION WINDOW BUTTON*/
+
+
+
+
+.btnn {
+  top:-50px;
+  left: 190px;
+  height: 10px;
+  width: 10px;
+ /* padding-bottom: -100px;*/
+  background-color: red;
+  box-shadow: 0 5px 0 darkred;
+  color: white;
+  padding: .2em .4em;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.btnn:hover {
+  background-color: #ce0606;
+}
+
+/*.btnn:active {
+  box-shadow: none;
+  top: -50px;
+}
+*/
+
+
+/* END OF THE GAME-IN-SESSION WINDOW BUTTON*/
+
+
+
+
+p.full-button{
+  left: 230px;
+  top: -50px;
+  /*width: 70px;*/
+}
+
+/*#newRoomContainer{
+  height: 40px;
+}*/
 .action-button:active {
   transform: translate(0px,5px);
   -webkit-transform: translate(0px,5px);
   border-bottom: 1px solid;
+}
+
+a.action-button{
+  color: black;
 }

@@ -13,13 +13,13 @@ resizeCanvas();
 
 const playerKeys = [ //object that maps the gameplay keys with its values i ascii table
   {                 // later we can use the a s d w keys to play as well
-    left: 37//65,// coresponds with a
-    right: 39 //68, // d
-    down: 40//83,// s
+    left: 37,//65,// coresponds with a
+    right: 39, //68, // d
+    down: 40,//83,// s
     drop: 32,// space
-    rotateClock: 38//69, // e
+    rotateClock: 38,//69, // e
     rotateCount: 81, // q
-    pause: 80,// p
+    pause: 80// p
   }
 ]
 

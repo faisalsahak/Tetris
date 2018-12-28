@@ -16,3 +16,22 @@ function drawMatrix(ctx,matrix, position, blockSize, colorScheme = {
     }
   }
 }
+
+function canvasText(ctx, text, font ='Arial', size, startX, startY, maxWidth, fillStyle, textAlign = "start") {
+  ctx.font = size + " " + font;
+  ctx.fillStyle = fillStyle;
+  ctx.textAlign = textAlign;
+  ctx.fillText(text, startX, startY, maxWidth)
+}
+
+function cls(canvas) {
+  canvas.ctx.fillStyle = 'black';
+  canvas.ctx.fillRect(0,0, canvas.CANVAS_WIDTH, canvas.CANVAS_HEIGHT);
+}
+
+function resizeCanvas(e) {
+  const canvasArray = document.querySelectorAll(".gameCanvas");
+  for (let i = 0; i < canvasArray.length; i++) {
+    canvasArray[i].style.height = (window.innerHeight * .45) + 'px';
+  }
+}

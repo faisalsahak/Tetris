@@ -64,5 +64,25 @@ class Piece {
     }
   }
 
+rotate(direction) {
+    let swapped = JSON.parse(JSON.stringify(this.matrix));
+    for(let y = 0; y < swapped.length; y++) {
+      for (let x = y; x < swapped[y].length; x++) {
+        [swapped[y][x], swapped[x][y]] = [swapped[x][y], swapped[y][x]]
+      }
+    }
+    if(direction === 1) {
+      for(let i = 0; i < swapped.length; i++) {
+        swapped[i].reverse();
+      }
+    } else if (direction === -1){
+      swapped.reverse();
+    }
+    this.matrix = swapped;
+  }
+
+  render() {
+    drawMatrix(this.ctx, this.matrix, this.pos, this.tileSize, this.colorScheme);
+  }
 
 }

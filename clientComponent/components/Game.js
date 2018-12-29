@@ -55,11 +55,15 @@ class Game {
 
   }
 
+
+
+
   draw() {
     cls(this.props);
     this.drawGameBG();
     if(this.paused) {
       this.drawPaused();
+
     } else if (this.player.isDead){
       this.player.board.render();
       this.player.render();
@@ -75,6 +79,7 @@ class Game {
     this.player.eventHandler.emit('pauseStatus', this.paused)
   }
 
+
   drawPaused() {
     let ctx = this.props.ctx;
     ctx.fillStyle = 'rgba(100,100,150, .85)';
@@ -83,6 +88,7 @@ class Game {
     ctx.strokeRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE);
     canvasText(ctx, 'PAUSED', 'Audiowide', '25px', 6 * this.props.TILESIZE, 10.5 * this.props.TILESIZE, 80, 'white', 'center')
   }
+
 
   drawDead() {
     let ctx = this.props.ctx;

@@ -14,6 +14,10 @@ class Player {
     this.nextPiece = this.getPiece();
     this.nextPiece.pos.x = this.board.width + 2;
     this.nextPiece.pos.y = 1;
+
+    this.nextPiece2 = this.getPiece();
+    this.nextPiece2.pos.x = this.board.width + 2;
+    this.nextPiece2.pos.y = 6;
   }
 
     // what this function does is generages 4 picees and returns it and once there is a need
@@ -101,34 +105,52 @@ class Player {
     }
 
     checkBoardCollision() {
-        for (let y = 0; y < this.activePiece.matrix.length; y++){
-            for (let x = 0; x < this.activePiece.matrix[y].length; x++) {
-                if(this.activePiece.matrix[y][x] !== 0 &&( this.board.matrix[y + this.activePiece.pos.y] &&
-                 this.board.matrix[y + this.activePiece.pos.y][x + this.activePiece.pos.x]) !== 0){
-                    return true;
-                }
+      for (let y = 0; y < this.activePiece.matrix.length; y++){
+          for (let x = 0; x < this.activePiece.matrix[y].length; x++) {
+              if(this.activePiece.matrix[y][x] !== 0 &&( this.board.matrix[y + this.activePiece.pos.y] &&
+               this.board.matrix[y + this.activePiece.pos.y][x + this.activePiece.pos.x]) !== 0){
+                  return true;
+              }
 
-            }
-        }
-        return false;
+          }
+      }
+      return false;
     }
 
     resetPiece() {
-        //TODO:: make more elegant
-        this.activePiece = this.nextPiece
-        this.activePiece.pos = {x: this.activePiece.initX, y: this.activePiece.initY};
-        this.nextPiece = this.getPiece();
-        this.nextPiece.pos.x = this.board.width + 2;
-        this.nextPiece.pos.y = 1;
+      //TODO:: make more elegant
 
-        this.eventHandler.emit('activePiecePos', this.activePiece.pos)
-        this.eventHandler.emit('activePieceMatrix', this.activePiece.matrix)
-        this.eventHandler.emit('nextPieceMatrix', this.nextPiece.matrix)
+      //job of these 5 lines are:
+      //once done with the current piece, it gets replaced with the next piece on the screen to the right
+      this.activePiece = this.nextPiece
+      this.activePiece.pos = {x: this.activePiece.initX, y: this.activePiece.initY};
+      // this.nextPiece = this.getPiece();
+      this.nextPiece = this.nextPiece2;
+      this.nextPiece.pos.x = this.board.width + 2;
+      this.nextPiece.pos.y = 1;
 
-        //Kills player and ends game as soon as new piece tries to spawn on occupied board space
-        if(this.checkBoardCollision()){
-            this.isDead = true;
-        }
+
+      // this.newPiece = new Piece(this.board, this.pieceBag.splice(1,2).join(''));
+
+      //these 4 lines will get the next next piece in the line up and replace it with the next piece to be active
+      this.activePiece.pos = {x: this.activePiece.initX, y: this.activePiece.initY};
+      this.nextPiece2 = this.getPiece();
+      this.nextPiece2.pos.x = this.board.width + 2;
+      this.nextPiece2.pos.y = 6;
+
+
+      this.eventHandler.emit('activePiecePos', this.activePiece.pos)
+      this.eventHandler.emit('activePieceMatrix', this.activePiece.matrix)
+      this.eventHandler.emit('nextPieceMatrix', this.nextPiece.matrix)
+
+      // this.eventHandler.emit('nextPieceMatrix', this.nextPiece2.matrix)
+
+      // this.activePiece = this.nextPiece2;
+
+      //Kills player and ends game as soon as new piece tries to spawn on occupied board space
+      if(this.checkBoardCollision()){
+          this.isDead = true;
+      }
 
     }
     // this method tracks if a line is completed so it can be removed and the rest dropped down
@@ -195,8 +217,10 @@ class Player {
     }
 
     render() {
-        this.activePiece.render();
-        this.nextPiece.render();
+        this.activePiece.render();// renders the current piece being played
+        this.nextPiece.render();// renders the next piece in the pool
+        this.nextPiece2.render(); // renders the next next piece to the right
+        // this.pieceBag[0].render();
     }
 
 }

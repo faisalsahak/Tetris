@@ -7,6 +7,8 @@ class Piece {
     this.colorScheme = board.colorScheme;
     this.initX = Math.floor(board.width /2) - 2;
     this.initY = 0;
+    // this.ctx.lineWidth = 1;
+
     this.pos = {
       x: this.initX,
       y: this.initY

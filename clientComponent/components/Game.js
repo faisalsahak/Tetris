@@ -10,7 +10,7 @@ class Game {
     // this.canvas.height =580;
     // console.log(this.canvas.width);
     // console.log(this.canvas.height);
-
+    console.log(props)
     // this.playerNameScores = new Map;
 
 
@@ -21,7 +21,6 @@ class Game {
     //Add the canvas context into the existing props defining canvas structure
     this.ctx = this.canvas.getContext('2d');
     this.props = Object.assign({}, props, {ctx: this.ctx});
-
     // this.ctx.strokeStyle = "white";
     // this.ctx.stroke();
 
@@ -49,17 +48,6 @@ class Game {
 
   }
 
-  // generateRandomName(len = 5){
-  //   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  //   let length = len;
-  //   let id = '';
-  //   while(length--) {
-  //     id += chars[Math.random() * chars.length | 0]
-  //   }
-  //   return id;
-  // }
-
-
 
   drawGameBG() {
     // console.log(outline)
@@ -68,7 +56,7 @@ class Game {
     ctx.fillStyle = 'rgba(175,150,200, .3)';
     ctx.fillRect(0,0, this.props.CANVAS_WIDTH, this.props.CANVAS_HEIGHT);
     //Playing area black
-    ctx.fillStyle = 'rgba(0,0,0, 1)';
+    ctx.fillStyle = '#2f2f2f';
     ctx.fillRect(0,0, this.props.BOARD_WIDTH * this.props.TILESIZE + 2, this.props.BOARD_HEIGHT * this.props.TILESIZE);
     //Border of playing area
     ctx.strokeStyle = 'white';
@@ -89,31 +77,60 @@ class Game {
     canvasText(this.ctx, 'LEVEL', 'Audiowide', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 360, 80,'yellow', 'center')
     canvasText(this.ctx, this.player.level + 1, 'Audiowide', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 390, 80,'white', 'center')
     // console.log(((this.player.board.width * this.player.board.tileSize) + 60));
-    // console.log(this.player.score);
+    // console.log("called");
+
 
 
   }
 
 
-  //  grid(){
-  //   var base_image = new Image();
-  //   base_image.src = '../grid.png';
-  //   base_image.width = 300;
-  //   base_image.height = 400;
-  //   // console.log(base_image)
-  //   // base_image.onload = function(){
-  //     this.ctx.drawImage(base_image, 0, 0, this.ctx.width -((this.player.board.width * this.player.board.tileSize) + 60), 500);
-  //   // }
-  // }
+
+drawLine(ctx,p1,p2,color){// draws the vertical and horizontal grid
+  ctx.beginPath();
+  ctx.moveTo(p1.x,p1.y);
+  ctx.lineTo(p2.x,p2.y);
+
+  ctx.lineWidth=1; // thinckness of each line in the grid
+  ctx.strokeStyle= color;
+
+  ctx.stroke();
+  ctx.closePath();
+};
+
+
+//Draw game grids
+drawGrids(el,gridSize,colCount,rowCount){
+  var gridSize = this.props.TILESIZE;
+  var ctx = el.getContext('2d');
+
+  var width = this.props.BOARD_WIDTH* this.props.TILESIZE;
+  var height = this.props.BOARD_HEIGHT * this.props.TILESIZE ;
+
+  var lineColor = 'rgba(255,255,255,0.1)';//the color of the grid, and also the visibility of it
+
+  for (var i = 1; i < colCount-8; i++) { //goes through the colcount and draws that many lines
+      var x = gridSize*i+0.5;
+    this.drawLine(ctx,{x:x,y:0},{x:x,y:height},lineColor);
+  };
+  for (var i = 1; i < rowCount; i++) { // goes through the rowCount and raws the lines
+    var y = gridSize*i+0.5;
+    this.drawLine(ctx,{x:0,y:y},{x:width,y:y},lineColor);
+  };
+};
+
+
+
 
 
   draw() {
     cls(this.props);
-    this.drawGameBG();
-        // this.grid();
+        // this.ctx.lineWidth = 1;
 
-    // this.drawGrid();
-    // this.ctx.lineWidth = 1;
+    this.drawGameBG();
+    //function call to draw the grid
+    this.drawGrids(this.canvas,this.gridSize,(this.props.BOARD_WIDTH +
+      this.player.board.width)-3,this.canvas.width);
+
     if(this.paused) {
       this.drawPaused();
 

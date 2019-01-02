@@ -6,7 +6,73 @@
   <link rel="stylesheet" type="text/css" href="room.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <body>
+
+  <script >
+    var socket = io.connect();
+     window.onload= socket.on('broadcast',function(data) {
+
+          // $('#scoresTable').text(data.description.score)
+
+          console.log("the mappppppppppppppppppppppp")
+          console.log(data.keys);
+          console.log(data.values)
+
+         var scoreContainer = document.getElementById('scoresTable');
+         var content = '';
+          for(var i = 0;i<data.keys.length; i++){
+            // var el = document.createElement('li');
+            // el.innerHTML = data.keys[i] + " : "+ data.values[i] +"\n";
+            // scoreContainer.appendChild(el);
+            var userInfo =
+                `<div><h5>${data.keys[i]} : ${data.values[i]}</h5></div>`
+                content+=userInfo;
+
+
+          }
+          scoreContainer.innerHTML = content;
+        // updateScores(data);
+
+        // console.log(data.description)
+    //     el.innerHTML = "hellooo";
+         // document.body.innerHTML = '';
+         // document.write(data.description);
+      });
+
+     socket.on('initialBroadcast', function(data){
+      // console.log('initialBroadcastsssss')
+      console.log(data.name+ " " + data.score);
+     })
+    //  function updateScores(data){
+    //   let info = data.description;
+    //   let content = '';
+    // // //     el.setAttribute('id', name);
+
+    //   // var ul = document.getElementById('liste');
+    // // console.log(li)
+    // // var troisieme_ville = li[2];
+    // // var nouvelle_ville = document.getElementById('remplacement').value;
+
+    // // // now put this value into the li tag by setting the .innerHTML
+    // // troisieme_ville.innerHTML = nouvelle_ville;
+
+
+    //   for(var i = 0; i<data.clients; i++){
+    //   // var li = scoreContainer.getElementsByTagName('li');
+    //   // li.innerHTML = "";
+    //     // scoreContainer = "";
+    //     scoreContainer.appendChild(el)
+    //     // scoreContainer.innerHTML  = data.description.name + " : "+ data.description.score +"\n";
+
+    //   }
+    //  }
+
+  </script>
+    <ul id="scoresTable">
+      <p id="highScoreTitle">High Scores</p>
+    </ul>
+  <!-- <img id="grid" src="grid.png" height="200" width="150" > -->
 
   <div class="flex-container-rows">
     <div id="flex-container-localRow">
@@ -41,9 +107,12 @@
     </div>
   </div>
 
+
+
   <template id="player-template">
     <div class="player game">
-      <canvas class="gameCanvas"></canvas>
+
+      <canvas class="gameCanvas" id="canvas" width="450px" height="400px"></canvas>
     </div>
   </template>
   <script src="/socket.io/socket.io.js"></script>

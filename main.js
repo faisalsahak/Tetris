@@ -33,6 +33,7 @@ app.get('/menu-update', function (req, res) {
 
 io.on('connection', (socket) => {
   console.log('connection detected', socket.id);
+  // console.log("new user")
 
   gameRoom(io, socket);
 
@@ -44,12 +45,13 @@ server.listen(port);
 //this function converts the info from 'map' into array of objects that are to be rendered on to the screen as room choices
 //only for room id and active players
 // this is where we can add client names //////////////////////////////////////
+// var numOfClients = 0;
 function parseMapForDB(map) {
   let parsed = [];
   let rooms = [...map.entries()];
-  console.log(rooms)
+  // console.log(rooms)/////////////////////////////////////
   rooms.forEach(([key, value]) => {
-    console.log(key, value)
+    // console.log(key, value)/////////////////////////////////////
     let clients = [...value.clients];
     const room = {
       'room': key,
@@ -129,19 +131,21 @@ function broadcastSession(session) {
   parseMapForDB(sessionsMap);
 }
 
-
+var playerInfo = new Map();
+var keys = [];
+var values = [];
 function gameRoom (io, socket) {
-
   const client = createClient(socket);
-
+  var numOfClients = 1;
   socket.on('message', (packet) => {
     const data = JSON.parse(packet);
+
 
   //######## gameRoom Socket Logic ######################
 
     if(data.type === 'createSession'){
 
-      console.log('Creating Session')
+      // console.log('Creating Session')/////////////////////////////////////////
 
       const session = createSession(generateRandomId()); //could also just use socket id?
       session.join(client);
@@ -153,8 +157,8 @@ function gameRoom (io, socket) {
     }
 
     else if (data.type === 'joinSession') {
-
-      console.log('Client joined session')
+      numOfClients+=1;
+      // console.log('Client joined session')/////////////////////////////////////////
 
       const session = sessionsMap.get(data.id) || createSession(data.id);
       session.join(client);
@@ -167,12 +171,39 @@ function gameRoom (io, socket) {
       //Receive state updates from clients
       client.state[data.key] = data.state;
       client.broadcast(data)
+
+      if(data.key === 'allInfo'){
+        playerInfo.set(data.name, data.score)
+        console.log("=============================")
+        // console.log("number of client: "+ numOfClients)
+        // console.log(playerInfo);
+        // for (var key of playerInfo.keys()) {
+        //   console.log(key);
+        var i = 0;
+
+        playerInfo.forEach(function(value, key, map) {
+          keys[i] = key;
+          values[i] = value;
+          i++;
+        });
+        io.sockets.emit('broadcast',{ keys: keys, values: values, clients: numOfClients})
+        // for(var j = 0; j<values.length; j++){
+        //   console.log(values[j]+ " " + keys[j]);
+
+        // }
+        // }
+        // for (var value of playerInfo.values()) {
+          // console.log(typeof playerInfo.values());
+        // }
+
+      }
+
     }
   });
 
   socket.on('disconnect', () => {
 
-    console.log('Client disconnected from session');
+    // console.log('Client disconnected from session');//////////////////////////
 
     const session = client.session;
     if(session) {

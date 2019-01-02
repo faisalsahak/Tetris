@@ -4,14 +4,50 @@ class ConnectionManager {
     this.peers = new Map;
     this.manager = manager;
     this.localInstance = this.manager.instances[0];
+    // this.socket = io.connect('http://localhost')
 
+// console.log(this.peers);
+    // this.mapValues();
   }
+
+// mapValues(){
+//   for (var m in this.peers){
+//     for (var i=0;i<this.peers[m].length;i++){
+//       console.log(this.peers[m][i]);
+//       console.log("ff")
+//     }
+//   }
+// }
+
+
+//   updateName(len = 5){
+//       const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+//       let length = len;
+//       let id = '';
+//       while(length--) {
+//         id += chars[Math.random() * chars.length | 0]
+//       }
+//       return id;
+//   }
+
+//   goThroughAllNames(){
+//     for(var i = 0; i <this.manager.instances.length; i++){
+//       var name = this.updateName();
+//       this.manager.instances[i].player.playerName = name;
+//       console.log("name generaged: " + name);
+//     }
+//   }
+
+
+
 
   connect() {
     this.connection = io.connect()
 
     this.connection.on('connect', () => {
       console.log('Connected to server');
+      // this.goThroughAllNames();
+      // console.log(this.manager.instances[0])
 
       this.initSession();
       this.initEventHandlers();
@@ -39,6 +75,9 @@ class ConnectionManager {
     else if (data.type === 'clientUpdate') {
       this.updatePeer(data)
     }
+    // else if(data.type === 'playerScore'){
+    //   console.log("got it")
+    // }
   }
 
   send(data) {
@@ -65,6 +104,9 @@ class ConnectionManager {
   }
 
   initEventHandlers() {
+    // console.log("local instanceeee");
+    // console.log(this.manager.instances)
+
     //Have server broadcast state for new instances to overwrite defaults on initializing them
     const player = this.localInstance.player;
 
@@ -75,17 +117,24 @@ class ConnectionManager {
     player.eventHandler.emit('score', player.score);
     player.eventHandler.emit('linesCleared', player.linesCleared);
     player.eventHandler.emit('activePiecePos', player.activePiece.pos);
+    player.eventHandler.emit('playerScore', player.playerName);
+    // console.log(player.score);
   }
 
   //
   //Listening to all important changes to local instance state to broadcast to server
   localStateListeners() {
+
     //This could be refactored to avoid duplication. But for now I like seeing it clearly delineated
     this.localInstance.player.eventHandler.listen('score', state => {
+      // console.log("connectionManager")
       this.send({
         type: 'clientUpdate',
-        key: 'score',
-        state,
+        key: 'allInfo',
+        name: this.localInstance.player.playerName,
+        score: this.localInstance.player.score,
+        level: this.localInstance.player.level
+
       })
     })
 
@@ -144,6 +193,19 @@ class ConnectionManager {
         state,
       })
     })
+
+    this.localInstance.player.eventHandler.listen('playerScore', state =>{
+      // console.log(this.peers.keys().Array)
+      // this.socket.emit('playerScores', this.peers)
+      this.send({
+        type: 'playerScores',
+        allInfo: "this si some infor being sent"
+      })
+      // this.peers.forEach(function(value, key) {
+      //   console.log(value.player);
+      //   // console.log(key + ' = ' + value);
+      // });
+    })
   }
 
   updateServer() {
@@ -153,9 +215,10 @@ class ConnectionManager {
       const packet = {
         type: 'clientUpdate',
         key,
-        state: stateBundle[key]
+        state: stateBundle[key],
       }
       this.send(packet);
+    // console.log("from ConnectionManager")
     }
   }
 
@@ -196,6 +259,8 @@ class ConnectionManager {
 
   //Update local copies of remote instances with state changes.
   updatePeer(data) {
+    // console.log("updating")
+    // console.log(this.localInstance.player.score);
         if (!this.peers.has(data.clientId)) {
             throw new Error('Client does not exist', data.clientId);
         }

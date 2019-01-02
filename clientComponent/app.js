@@ -22,7 +22,6 @@ const playerKeys = [ //object that maps the gameplay keys with its values i asci
     pause: 80// p
   }
 ]
-
 //37
 
 window.addEventListener("resize", resizeCanvas, false);
@@ -59,3 +58,30 @@ function handleKeydown(event) {
     }
   })
 }
+
+
+// function playerNames(){
+
+// }
+
+// function addNameToScoreTable(){
+//   var scoreContainer = document.getElementById('scoresTable');
+//   // console.log(this.player.playerName)
+//   // console.log(manager.instances);
+//   // console.log(manager.instances[1].player.playerName);
+//   var counter = 0;
+//    for(var i = 0; i<manager.instances.length; i++){
+//     // addNameToScoreTable(manager.instances[i].player.playerName);
+//     var el = document.createElement('li');
+//     var playerInfo = manager.instances[i].player
+//     el.innerHTML  = playerInfo.playerName + " : \t "+ playerInfo.score +"\n";
+//     scoreContainer.appendChild(el);
+//     // console.log(manager)
+//     // console.log(manage[i].player)
+//   }
+//   // el.innerHTML = name
+//   // console.log(name)
+
+// }
+
+// window.onload = addNameToScoreTable;

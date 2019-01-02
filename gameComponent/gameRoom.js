@@ -1,9 +1,13 @@
 function gameRoom (io, socket) {
 
   const client = createClient(socket);
-
+  // console.log("gameroron")
   socket.on('message', (packet) => {
     const data = JSON.parse(packet);
+    // console.log(packet);
+    // if(data.type ==='playerScores'){
+    //   console.log("playerscores comming in")
+    // }
     // when a session is created
     if(data.type === 'createSession'){
 
@@ -33,7 +37,9 @@ function gameRoom (io, socket) {
       //Receive state updates from clients
       client.state[data.key] = data.state;
       client.broadcast(data)
+      // console.log("something happnen")
     }
+
   });
 
   socket.on('disconnect', () => {
@@ -51,6 +57,8 @@ function gameRoom (io, socket) {
     //update clients when a player disconnects
     broadcastSession(session);
   })
+
+
 
 }
 

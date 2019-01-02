@@ -109,7 +109,7 @@ span {
 
 .mainGame {
   height: 95%;
-  width: 40%;
+  width: 0%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -158,6 +158,13 @@ span {
   display: block;
   margin: auto;
   border: 5px solid black;
+}
+
+#scoresTable{
+  border: 10px;
+  position: absolute;
+  float: right;
+  left: 1100px;
 }
 
 .player {

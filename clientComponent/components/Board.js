@@ -4,8 +4,10 @@ class Board {
     //should start tracking x/y for multiple boards later
     this.width = props.BOARD_WIDTH;
     this.height = props.BOARD_HEIGHT;
-    this.tileSize = props.TILESIZE;
+    this.tileSize = props.TILESIZE ;
     this.ctx = props.ctx;
+    // this.ctx.strokeStyle = "white";
+    // this.ctx.stroke();
     this.matrix = this.generateEmptyBoard();
     this.colorScheme = props.colorScheme;
   }
@@ -15,6 +17,14 @@ class Board {
     for(let i = 0; i < this.height; i++){
       matrix.push(new Array(this.width).fill(0))
     };
+    // for(var i = 0; i<matrix.length; i++){
+    //   for(var j = 0; j<matrix[i].length; j++ ){
+    //     console.log(matrix[i][j])
+    //   }
+    // }
+
+
+    console.log("running");
     return matrix;
   }
 
@@ -33,4 +43,13 @@ class Board {
     drawMatrix(this.ctx, this.matrix, {x: 0, y: 0}, this.tileSize, this.colorScheme)
   }
 }
+
+
+
+
+
+
+
+
+
 

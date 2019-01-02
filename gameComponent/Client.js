@@ -17,7 +17,6 @@ class Client {
   }
   //if a session is in progress or exists
   broadcast(data) {
-
     if(!this.session) {
       throw new Error('No session to broadcast to!')
     }

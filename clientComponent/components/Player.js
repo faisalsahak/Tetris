@@ -30,6 +30,12 @@ class Player {
     this.nextPiece3 = this.getPiece();
     this.nextPiece3.pos.x = this.board.width+1.5;
     this.nextPiece3.pos.y = 6;
+
+
+    // this.ghostPiece = this.activePiece;
+    // this.ghostPiece.pos.x = this.activePiece.pos.x;
+    // this.ghostPiece.pos.y = this.activePiece.pos.y + 15;
+    // console.log(this)
   }
 
 
@@ -147,6 +153,7 @@ generateRandomId(len = 2) {
     }
 
     resetPiece() {
+      // console.log(this.activePiece.render())
         // console.log("from playersssssssssss")
         var allInfo = this.getPlayerInfo();
         this.eventHandler.emit('allScores', allInfo);
@@ -157,6 +164,12 @@ generateRandomId(len = 2) {
       //once done with the current piece, it gets replaced with the next piece on the screen to the right
       this.activePiece = this.nextPiece
       this.activePiece.pos = {x: this.activePiece.initX, y: this.activePiece.initY};
+
+      // this.ghostPiece = this.activePiece;
+      // this.ghostPiece.pos.x = this.activePiece.pos.x;
+      // this.ghostPiece.pos.y = this.activePiece.pos.y + 15;
+      // console.log(this.ghostPiece)
+
       // this.nextPiece = this.getPiece();
       this.nextPiece = this.nextPiece2;
       this.nextPiece.pos.x = this.board.width+1.5;
@@ -285,6 +298,26 @@ generateRandomId(len = 2) {
 
     //   // }
 
+    // draw(tetro, cx, cy, ctx, color) {
+    //   for (var x = 0, len = tetro.length; x < len; x++) {
+    //     for (var y = 0, wid = tetro[x].length; y < wid; y++) {
+    //       if (tetro[x][y])
+    //         drawCell(x + cx, y + cy, color !== void 0 ? color : tetro[x][y], ctx);
+    //     }
+    //   }
+    // }
+
+    // drawGhost() {
+    //   console.log(this.tetro)
+    //   if (!settings.Ghost && !landed) {
+    //     draw(this.tetro, this.x, this.y + this.getDrop(22), activeCtx, 0);
+    //   } else if (settings.Ghost === 1 && !landed) {
+    //     activeCtx.globalAlpha = 0.3;
+    //     draw(this.tetro, this.x, this.y + this.getDrop(22), activeCtx);
+    //     activeCtx.globalAlpha = 1;
+    //   }
+    // }
+
     //   var scoreContainer = document.getElementById('scoresTable');
     //     var el = document.createElement('p');
     //     el.setAttribute('id', name);
@@ -380,7 +413,7 @@ generateRandomId(len = 2) {
         this.activePiece.render();// renders the current piece being played
         this.nextPiece.render();// renders the next piece in the pool
         this.nextPiece2.render(); // renders the next next piece to the right
-        this.nextPiece3.render(); // renders the next next piece to the right
+        this.nextPiece3.render(); // renders the next next piece to the right\
         // console.log(this.playerNameScores.get(name));
         // console.log("aa")
         // this.pieceBag[0].render();

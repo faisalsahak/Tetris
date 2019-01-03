@@ -77,9 +77,9 @@
   <div class="flex-container-rows">
     <div id="flex-container-localRow">
       <div class="textBox-left">
-        <div class="logoFlexBox">
+       <!--  <div class="logoFlexBox">
           <img class="tetrisLogo" src="media/logo.png">
-        </div>
+        </div> -->
         <!-- NEED TO SHOW THIS PART WHEN THE GAME IS ABOUT TO BEGIN FOR 3 SECODNS -->
        <!--  <div class="controls">
           <h2>Controls</h2>
@@ -109,10 +109,11 @@
 
 
 
+      <!-- <canvas class="shadowCanvas" id="shadow_canvas" width="450px" height="400px" style="z-index:1" ></canvas> -->
   <template id="player-template">
     <div class="player game">
 
-      <canvas class="gameCanvas" id="canvas" width="450px" height="400px"></canvas>
+      <canvas class="gameCanvas" id="canvas" width="450px" height="400px" style="z-index:2"></canvas>
     </div>
   </template>
   <script src="/socket.io/socket.io.js"></script>

@@ -10,8 +10,15 @@ class Game {
     // this.canvas.height =580;
     // console.log(this.canvas.width);
     // console.log(this.canvas.height);
-    console.log(props)
     // this.playerNameScores = new Map;
+
+    //  for the shadow canvas
+    // this.shadowCanvas = document.getElementById('shadow_canvas');
+    // // console.log(this.element)
+    // this.shadowCanvas.width = props.CANVAS_WIDTH ;
+    // this.shadowCanvas.height = props.CANVAS_HEIGHT;
+    // this.shadowY = 0;
+    // this.pieceY = 0;
 
 
     // this.scoreCanvas = this.element.querySelector('.scoreCanvas');
@@ -51,6 +58,7 @@ class Game {
 
   drawGameBG() {
     // console.log(outline)
+    // console.log(this.player)
     let ctx = this.props.ctx;
     //This is the Sidebar color
     ctx.fillStyle = 'rgba(175,150,200, .3)';
@@ -133,6 +141,8 @@ drawGrids(el,gridSize,colCount,rowCount){
 
     if(this.paused) {
       this.drawPaused();
+      // this.reset();
+      // this.draw();
 
     } else if (this.player.isDead){
       this.player.board.render();
@@ -254,4 +264,77 @@ drawGrids(el,gridSize,colCount,rowCount){
     this.draw();
   }
 
+
+
+  // clearMatrix (matrix){
+  //   for(var i = 0;i<matrix.length;i++){
+  //     for(var j = 0;j<matrix[i].length;j++){
+  //       matrix[i][j] = 0;
+  //     }
+  //   }
+  // }
+
+  // reset(){
+  //   // this.running = false;
+  //   this.player.isDead = false;
+  //   this.player.level = 1;
+  //   this.player.score = 0;
+  //   this.paused = false;
+  //   // this.startTime = new Date().getTime();
+  //   // this.currentTime = this.startTime;
+  //   // this.prevTime = this.startTime;
+  //   // this.levelTime = this.startTime;
+  //   this.clearMatrix(this.player.board.matrix);
+  //   console.log(this.player.board.matrix);
+  //   // views.setLevel(this.level);
+  //   // views.setScore(this.score);
+  //   // views.setGameOver(this.isGameOver);
+  //   // this._draw();
+  //   this.run = this.run.bind(this);
+  // }
+
+  // Does not need to be called every frame like updatePiece is.
+// will be called from left and right moves, also
+//   updateShadow() {
+//     var ctx = document.getElementById('shadow_canvas').getContext('2d');
+//     drawShadow(ctx);
+//   }
+
+
+//  drawShadow(context) {
+//   var curY;
+//   var count = 0;
+//   var origY = pieceY;
+//   while(!isPieceInside()) {
+//     curY = pieceY;
+//     pieceY++;
+//   count++;
+//   } // This is a little bad --
+//   // I am modifying critical program state
+//   // when it is not necessary.
+//   // This is done to increase code reuse
+//   pieceY = origY;
+//   this.shadowY = curY;
+//   if (!count) return;
+//   drawShadowPieceAt(context,pieceX,curY);
+// }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

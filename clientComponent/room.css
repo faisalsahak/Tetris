@@ -2,7 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: lightblue;
+  background-color: grey;
   font-family: 'Audiowide', cursive;
 
 }
@@ -149,12 +149,13 @@ span {
   box-shadow: inset 0px 0px 19px -1px rgba(0,0,0,0.4);
 }
 
-#localContainer .gameCanvas {
+#localContainer .gameCanvas .shadowCanvas {
   border: 3px solid yellow;
 }
 
-#remoteContainer .gameCanvas {
+#remoteContainer .gameCanvas .shadowCanvas {
   height: 100%;
+  top: 100px;
   display: block;
   margin: auto;
   border: 5px solid black;

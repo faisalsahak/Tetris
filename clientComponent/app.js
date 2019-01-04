@@ -2,7 +2,7 @@ const manager = new Manager(document, true);
 const playerLocal = manager.createPlayer(true);
 playerLocal.element.classList.add('local');
 playerLocal.run();
-
+var socket = io.connect('http://localhost:9000');
 
 const connectionManager = new ConnectionManager(manager);
 
@@ -59,6 +59,22 @@ function handleKeydown(event) {
   })
 }
 
+socket.on('broadcast', function(data){
+  // console.log("from the app.js file");
+  var scoreContainer = document.getElementById('scoresTable');
+             var content = '';
+              for(var i = 0;i<data.keys.length; i++){
+                // var el = document.createElement('li');
+                // el.innerHTML = data.keys[i] + " : "+ data.values[i] +"\n";
+                // scoreContainer.appendChild(el);
+                var userInfo =
+                    `<div><h5>${data.keys[i]} : ${data.values[i]}</h5></div>`
+                    content+=userInfo;
+
+
+              }
+              scoreContainer.innerHTML = content;
+})
 
 // function playerNames(){
 

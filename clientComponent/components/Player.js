@@ -79,7 +79,7 @@ generateRandomId(len = 2) {
   }
 
   movePiece(direction) {
-    console.log("left or right pressed")
+    // console.log("left or right pressed")
         this.leftRightPressed.play()//adds the sound for left and right arrows
         this.activePiece.pos.x += direction;
         if(this.checkBoardCollision()){
@@ -90,7 +90,7 @@ generateRandomId(len = 2) {
     }
 
     rotatePiece(direction) {
-      console.log("up arrows pressed")
+      // console.log("up arrows pressed")
       this.leftRightPressed.play()//adds the sound for left and right arrows
         // TODO:: need to fix the wall-kick effect
         this.activePiece.rotate(direction);
@@ -128,7 +128,7 @@ generateRandomId(len = 2) {
     }
 
     dropPiece() {
-      console.log("down arrow pressed")
+      // console.log("down arrow pressed")
             this.activePiece.pos.y++;
             if(this.checkBoardCollision()) {
                 this.handleDropCollision();
@@ -138,7 +138,7 @@ generateRandomId(len = 2) {
     }
 
     instantDrop() {
-        console.log(this)
+        // console.log(this)
         // console.log(this)
         // this.sound('../sounds/spacePressed.mp3')
         // this.stop();
@@ -165,20 +165,20 @@ generateRandomId(len = 2) {
       return false;
     }
 
-    sound(src) {
-      this.sound = document.createElement("audio");
-      this.sound.src = src;
-      this.sound.setAttribute("preload", "auto");
-      this.sound.setAttribute("controls", "none");
-      this.sound.style.display = "none";
-      document.body.appendChild(this.sound);
-      this.play = function(){
-        this.sound.play();
-      }
-      this.stop = function(){
-        this.sound.pause();
-      }
-    }
+    // sound(src) {
+    //   this.sound = document.createElement("audio");
+    //   this.sound.src = src;
+    //   this.sound.setAttribute("preload", "auto");
+    //   this.sound.setAttribute("controls", "none");
+    //   this.sound.style.display = "none";
+    //   document.body.appendChild(this.sound);
+    //   this.play = function(){
+    //     this.sound.play();
+    //   }
+    //   this.stop = function(){
+    //     this.sound.pause();
+    //   }
+    // }
 
     resetPiece() {
       // console.log(this.activePiece.render())
@@ -258,7 +258,7 @@ generateRandomId(len = 2) {
         }
         //TODO:: add some sound and also some kind of award system
         if(completedLines) {
-            console.log("row cleared")
+            // console.log("row cleared")
             this.rowCleared.play();
             const newLines = this.linesCleared + completedLines;
             this.setLines(newLines);

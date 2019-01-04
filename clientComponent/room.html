@@ -5,13 +5,15 @@
   <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="room.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
 <body>
 
-  <script >
+<!--   <script >
+
     var socket = io.connect();
-     window.onload= socket.on('broadcast',function(data) {
+     socket.on('broadcast',function(data) {
 
           // $('#scoresTable').text(data.description.score)
 
@@ -68,7 +70,7 @@
     //   }
     //  }
 
-  </script>
+  </script> -->
     <ul id="scoresTable">
       <p id="highScoreTitle">High Scores</p>
     </ul>
@@ -116,7 +118,7 @@
       <canvas class="gameCanvas" id="canvas" width="450px" height="400px" style="z-index:2"></canvas>
     </div>
   </template>
-  <script src="/socket.io/socket.io.js"></script>
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
   <script type="text/javascript" src="utilities/utilities.js"></script>
   <script type="text/javascript" src="components/ConnectionManager.js"></script>
   <script type="text/javascript" src="components/EventHandler.js"></script>

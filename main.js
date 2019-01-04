@@ -39,6 +39,7 @@ io.on('connection', (socket) => {
 
 });
 
+
 server.listen(port);
 
 
@@ -108,7 +109,9 @@ function createClient(socket, id = generateRandomId()) {
 
 
 function broadcastSession(session) {
+  // console.log(session.clients)
   //extract all clients into new array using spread operator
+  if(session !== null){
   const clients = [...session.clients] || []; //To avoid server crash if there are no clients
   clients.forEach( client => {
     client.send({
@@ -126,6 +129,7 @@ function broadcastSession(session) {
       }
     })
   })
+}
 
   //This will update the DB when implemented to track rooms and occupants
   parseMapForDB(sessionsMap);
@@ -216,8 +220,8 @@ function gameRoom (io, socket) {
     //update clients when a player disconnects
     broadcastSession(session);
   })
-
 }
+
 
 
 

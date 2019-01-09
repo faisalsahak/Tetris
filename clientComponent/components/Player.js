@@ -7,7 +7,7 @@ class Player {
     this.lastClearHeight = 0;
     this.level = 0;
     // console.log(this.props);
-    this.playerName = "Player "+ this.generateRandomId();
+    // this.playerName = "Player "+ this.generateRandomId();
     this.isDead = false;
     this.colorScheme = props.colorScheme;
     this.ctx.lineWidth = 1;

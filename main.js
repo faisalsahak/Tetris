@@ -32,7 +32,8 @@ app.get('/menu-update', function (req, res) {
 
 
 io.on('connection', (socket) => {
-  console.log('connection detected', socket.id);
+  // console.log(socket)
+  // console.log('connection detected', socket.id);
   // console.log("new user")
 
   gameRoom(io, socket);
@@ -61,6 +62,7 @@ function parseMapForDB(map) {
     parsed.push(room)
 
   })
+  // console.log(parsed)
   return parsed;
 }
 
@@ -89,6 +91,17 @@ function generateRandomId(len = 8) {
   }
   return id;
 }
+
+// function generateRandomNum(len = 2) {
+
+//   const chars = '0123456789';
+//   let length = len;
+//   let id = '';
+//   while(length--) {
+//     id += chars[Math.random() * chars.length | 0]
+//   }
+//   return id;
+// }
 
 // creates a unique session id
 function createSession(id) {
@@ -135,6 +148,22 @@ function broadcastSession(session) {
   parseMapForDB(sessionsMap);
 }
 
+function removeArr(){
+  for(var i = 0; i<keys.length; i++){
+    keys.pop();
+    values.pop();
+  }
+}
+
+function mapToArr(){
+  var i = 0;
+  playerInfo.forEach(function(value, key, map) {
+          keys[i] = key;
+          values[i] = value;
+          i++;
+        });
+}
+
 var playerInfo = new Map();
 var keys = [];
 var values = [];
@@ -148,7 +177,8 @@ function gameRoom (io, socket) {
   //######## gameRoom Socket Logic ######################
 
     if(data.type === 'createSession'){
-
+      console.log("player Createddddd")
+      // client.playerName = "Player "+ generateRandomNum();
       // console.log('Creating Session')/////////////////////////////////////////
 
       const session = createSession(generateRandomId()); //could also just use socket id?
@@ -158,6 +188,9 @@ function gameRoom (io, socket) {
         type: 'sessionCreated',
         id: session.id,
       });
+
+      // playerInfo.set(client.playerName, data.score)
+      // io.sockets.emit('broadcast',{ key: client.playerName, value: data.score})
     }
 
     else if (data.type === 'joinSession') {
@@ -166,8 +199,16 @@ function gameRoom (io, socket) {
 
       const session = sessionsMap.get(data.id) || createSession(data.id);
       session.join(client);
+      //when a new player joins and there are players playing in the room, then their scores will be displayed on the new users window
+      if(keys.length >0){
+        playerInfo.set(client.playerName, data.score)
+        console.log("greater")
+        mapToArr(); //moves the items from the map to the arrays, because the map cannot be sent over the network
+        io.sockets.emit('broadcast',{ keys: keys, values: values, clients: numOfClients})
 
+      }
       //Update clients with new player joined to session
+      // console.log(session.clients)
       broadcastSession(session);
     }
 
@@ -177,20 +218,24 @@ function gameRoom (io, socket) {
       client.broadcast(data)
 
       if(data.key === 'allInfo'){
-        playerInfo.set(data.name, data.score)
+        // client.playerName = data.name;
+        playerInfo.set(client.playerName, data.score)
         console.log("=============================")
         // console.log("number of client: "+ numOfClients)
         // console.log(playerInfo);
         // for (var key of playerInfo.keys()) {
         //   console.log(key);
-        var i = 0;
+        // var i = 0;
 
-        playerInfo.forEach(function(value, key, map) {
-          keys[i] = key;
-          values[i] = value;
-          i++;
-        });
+        mapToArr();
+        console.log(client.playerName)
+        // socket.send(JSON.stringify(playerInfo));
         io.sockets.emit('broadcast',{ keys: keys, values: values, clients: numOfClients})
+        // io.sockets.emit('broadcast',{ data: JSON.stringify(playerInfo)})
+        // for(var i = 0; i<keys.length; i++){
+        //   keys.pop();
+        //   values.pop();
+        // }
         // for(var j = 0; j<values.length; j++){
         //   console.log(values[j]+ " " + keys[j]);
 
@@ -207,13 +252,26 @@ function gameRoom (io, socket) {
 
   socket.on('disconnect', () => {
 
-    // console.log('Client disconnected from session');//////////////////////////
+    console.log('Client disconnected from session');//////////////////////////
+    console.log(client.playerName);
 
     const session = client.session;
     if(session) {
+      // console.log(client.playerName + " " + client.)
+      // console.log(session)
+      playerInfo.delete(client.playerName); // remove the player from the map
+      var index = keys.indexOf(client.playerName);//get the index of the player in the map
+      if (index !== -1){ //if the index exists then remove it from the 2 arrays
+        keys.splice(index, 1);
+        values.splice(index,1);
+      }
       session.leave(client);
-      if(session.clients.size === 0) {
-        sessionsMap.delete(session.id)
+      if(session.clients.size === 0) {// when no one is left in the game
+        playerInfo.clear();
+        removeArr();// remove all the elements from the array
+        console.log("size of map : "+ playerInfo.size);
+        sessionsMap.delete(session.id)// delete the session
+
       }
     }
 

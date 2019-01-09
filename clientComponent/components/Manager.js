@@ -57,6 +57,7 @@ class Manager {
   }
 
   createPlayer(local = false) {
+    // console.log("user created")
     // console.log("new Player has joinnnnneeeeeeed")
     const element = document.importNode(this.template.content, true)
                    .children[0];

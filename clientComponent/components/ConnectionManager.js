@@ -224,6 +224,7 @@ class ConnectionManager {
 
   //Handle new remote clients joining session or leaving session
   updateManager(instances) {
+    console.log(instances)
     //Create a filtered list of remote peers
     const myId = instances.you;
     const remoteInstances = instances.clients.filter(client => client.id !== myId)

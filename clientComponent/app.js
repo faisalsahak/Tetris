@@ -60,21 +60,34 @@ function handleKeydown(event) {
 }
 
 socket.on('broadcast', function(data){
+  // console.log(JSON.parse(data.data));
   // console.log("from the app.js file");
   var scoreContainer = document.getElementById('scoresTable');
+            scoreContainer.innerHTML = "";
              var content = '';
               for(var i = 0;i<data.keys.length; i++){
                 // var el = document.createElement('li');
                 // el.innerHTML = data.keys[i] + " : "+ data.values[i] +"\n";
                 // scoreContainer.appendChild(el);
                 var userInfo =
-                    `<div><h5>${data.keys[i]} : ${data.values[i]}</h5></div>`
+                    `<div><h5>${data.keys[i]} : ${data.values[i]===null?0 : data.values[i]}</h5></div>`
                     content+=userInfo;
 
 
               }
               scoreContainer.innerHTML = content;
 })
+
+// socket.on('nameScore', function(data){
+//   var scoreContainer = document.getElementById('scoresTable');
+//   var userInfo =
+//                     `<div><h5>${data.key} : ${data.value}</h5></div><br/>`
+//                     scoreContainer.innerHTML = userInfo;
+// })
+
+// socket.on('message', function (message) {
+//   console.log(JSON.parse(message));
+// });
 
 // function playerNames(){
 

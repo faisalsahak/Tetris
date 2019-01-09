@@ -9,6 +9,8 @@ class Session {
       throw new Error ('Client already in session')
     }
 
+    // console.log(client)
+
     this.clients.add(client);
     client.session = this;
   }

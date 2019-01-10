@@ -12,6 +12,7 @@ html, body {
 #logoFlexBox {
   height: 20%;
   width: 100%;
+  /*left: 50%;*/
   /*display: flex;*/
   display: inline-block;
   flex-direction: row;
@@ -19,11 +20,20 @@ html, body {
   justify-content: center;
 }
 
+#logoFlexBox h1{
+  /*left: 50%;*/
+  margin-left: 45%;
+}
+
+
+
 
 #menuContainer {
-  height: 60%;
-  width: 25%;
+  height: 45%;
+  width: 96.5%;
   display: inline-block;
+  position: relative;
+  top: 200px;
   /*margin: auto;*/
   margin-left: 20px;
   overflow-y: scroll;
@@ -144,8 +154,8 @@ html, body {
 
 .newRoomButton{
   position:relative;
-  top: -400px;
-  left: 410px;
+  /*top: -218px;*/
+  left: 45%;
   /*background:#1AAB8A;*/
   color:#fff;
   /*border:none;*/
@@ -173,7 +183,7 @@ html, body {
   display: inline-block;
   position: relative;
   padding: 10px 15px;
-  top: -475px;
+  top: -260px;
   font-size: 30px;
   font-family: "Open Sans", Helvetica;
   border-radius: 4px;
@@ -194,7 +204,7 @@ html, body {
 }
 
 .newRoomButton:hover {
-  top: -475px;
+  top: -260px;
   box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
 
   -webkit-transform: rotateX(20deg);
@@ -204,7 +214,7 @@ html, body {
 }
 
 .newRoomButton:active {
-  top: -475px;
+  top: -260px;
   box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
   background: rgba( 20, 224, 133, 1 );
 }
@@ -265,3 +275,7 @@ p.full-button{
 a.action-button{
   color: black;
 }
+
+/*.hidden{
+  display: none;
+}*/

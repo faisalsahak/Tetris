@@ -62,7 +62,7 @@ function handleKeydown(event) {
 socket.on('broadcast', function(data){
   // console.log(JSON.parse(data.data));
   // console.log("from the app.js file");
-  var scoreContainer = document.getElementById('scoresTable');
+  var scoreContainer = document.getElementById('scoresTableList');
             scoreContainer.innerHTML = "";
              var content = '';
               for(var i = 0;i<data.keys.length; i++){

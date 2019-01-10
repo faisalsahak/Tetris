@@ -3,17 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>Multiplayer Tetris</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <div id="logoFlexBox">
-      <h1>HEADER GOES HERE</h1>
+      <h1>Block Wars</h1>
     </div>
-    <div id="menuContainer"></div>
+    <div id="menuContainer" class="hidden"></div>
     <div id="newRoomContainer">
       <a href="/room" class="newRoomButton shadow">New Game</a>
     </div>
+    <!-- <div id="show">
+      <a href="#" class="show">show div</a>
+    </div> -->
 
       <script>
         const menuContainer = document.getElementById('menuContainer');
@@ -77,6 +81,25 @@
             }
             menuContainer.innerHTML = content+"\n";
           }
+
+
+
+          // $(document).ready(function(){
+
+          //   //if you wish to keep both the divs hidden by default then dont forget to hide //them
+          //   $(".hidden").hide();
+          //   // $("#about-content").hide();
+
+          //  $(".show").click(function(){
+          //        // $("#help-content").hide();
+          //        $(".hidden").show();
+          //   });
+
+          //  // $("#help-anchor").click(function(){
+          //  //      $("#help-content").show();
+          //  //       ("#about-content").hide();
+          //  // });
+          // });
 
         </script>
 

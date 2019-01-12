@@ -164,12 +164,16 @@ function mapToArr(){
         });
 }
 
+function sendScoreData(io){
+  io.sockets.emit('broadcast',{ keys: keys, values: values});
+}
+
 var playerInfo = new Map();
 var keys = [];
 var values = [];
 function gameRoom (io, socket) {
   const client = createClient(socket);
-  var numOfClients = 1;
+  // var numOfClients = 1;
   socket.on('message', (packet) => {
     const data = JSON.parse(packet);
 
@@ -177,7 +181,11 @@ function gameRoom (io, socket) {
   //######## gameRoom Socket Logic ######################
 
     if(data.type === 'createSession'){
-      console.log("player Createddddd")
+      // console.log("player Createddddd")
+      console.log("player is created with name:  "+client.playerName);
+      playerInfo.set(client.playerName, data.score);
+      mapToArr();
+      sendScoreData(io);
       // client.playerName = "Player "+ generateRandomNum();
       // console.log('Creating Session')/////////////////////////////////////////
 
@@ -194,7 +202,7 @@ function gameRoom (io, socket) {
     }
 
     else if (data.type === 'joinSession') {
-      numOfClients+=1;
+      // numOfClients+=1;
       // console.log('Client joined session')/////////////////////////////////////////
 
       const session = sessionsMap.get(data.id) || createSession(data.id);
@@ -204,7 +212,8 @@ function gameRoom (io, socket) {
         playerInfo.set(client.playerName, data.score)
         console.log("greater")
         mapToArr(); //moves the items from the map to the arrays, because the map cannot be sent over the network
-        io.sockets.emit('broadcast',{ keys: keys, values: values, clients: numOfClients})
+        // io.sockets.emit('broadcast',{ keys: keys, values: values})
+        sendScoreData(io);// sends the player name and scores to the user to display
 
       }
       //Update clients with new player joined to session
@@ -228,9 +237,10 @@ function gameRoom (io, socket) {
         // var i = 0;
 
         mapToArr();
-        console.log(client.playerName)
+        sendScoreData(io);// sends the player name and scores to the user to display
+        // console.log(client.playerName)
         // socket.send(JSON.stringify(playerInfo));
-        io.sockets.emit('broadcast',{ keys: keys, values: values, clients: numOfClients})
+        // io.sockets.emit('broadcast',{ keys: keys, values: values})
         // io.sockets.emit('broadcast',{ data: JSON.stringify(playerInfo)})
         // for(var i = 0; i<keys.length; i++){
         //   keys.pop();
@@ -266,6 +276,7 @@ function gameRoom (io, socket) {
         values.splice(index,1);
       }
       session.leave(client);
+      sendScoreData(io);// sends the updated player scores to display
       if(session.clients.size === 0) {// when no one is left in the game
         playerInfo.clear();
         removeArr();// remove all the elements from the array

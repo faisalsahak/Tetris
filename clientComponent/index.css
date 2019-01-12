@@ -5,8 +5,8 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Audiowide', cursive;
-  /*background: lightblue;*/
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background: #494646;
+  /*background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);*/
 }
 
 #logoFlexBox {
@@ -22,18 +22,19 @@ html, body {
 
 #logoFlexBox h1{
   /*left: 50%;*/
-  margin-left: 45%;
+  margin-left: 2%;
 }
 
 
 
 
 #menuContainer {
-  height: 45%;
-  width: 96.5%;
+  height: 40%;
+  width: 31%;
   display: inline-block;
-  position: relative;
-  top: 200px;
+  position: absolute;
+  top: 315px;
+  left: 499px;
   /*margin: auto;*/
   margin-left: 20px;
   overflow-y: scroll;
@@ -72,9 +73,9 @@ html, body {
 }
 
 .roomName {
-  width:60% ;
+  width:100% ;
   font-weight: bold;
-  margin
+  /*margin*/
 }
 
 .roomPop {
@@ -153,9 +154,9 @@ html, body {
 /* START OF THE NEW GAME BUTTON*/
 
 .newRoomButton{
-  position:relative;
+  /*position:relative;*/
   /*top: -218px;*/
-  left: 45%;
+  left: 55%;
   /*background:#1AAB8A;*/
   color:#fff;
   /*border:none;*/
@@ -181,9 +182,9 @@ html, body {
 /* Custom */
 .newRoomButton {
   display: inline-block;
-  position: relative;
+  position: absolute;
   padding: 10px 15px;
-  top: -260px;
+  top: 220px;
   font-size: 30px;
   font-family: "Open Sans", Helvetica;
   border-radius: 4px;
@@ -204,7 +205,7 @@ html, body {
 }
 
 .newRoomButton:hover {
-  top: -260px;
+  top: 220px;
   box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
 
   -webkit-transform: rotateX(20deg);
@@ -214,9 +215,13 @@ html, body {
 }
 
 .newRoomButton:active {
-  top: -260px;
+  top: 220px;
   box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
   background: rgba( 20, 224, 133, 1 );
+}
+
+.getActiveRooms{
+  left: 36%;
 }
 /* END OF THE NEW GAME WINDOW BUTTON*/
 
@@ -228,7 +233,7 @@ html, body {
 
 .btnn {
   top:-50px;
-  left: 190px;
+  left: 340px;
   height: 10px;
   width: 10px;
  /* padding-bottom: -100px;*/
@@ -276,6 +281,13 @@ a.action-button{
   color: black;
 }
 
+#homepage{
+  width: 60%;
+  height: 300px;
+  left: 265px;
+  top: -260px;
+  position: absolute;
+}
 /*.hidden{
   display: none;
 }*/

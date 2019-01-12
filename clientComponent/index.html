@@ -14,7 +14,9 @@
     <div id="menuContainer" class="hidden"></div>
     <div id="newRoomContainer">
       <a href="/room" class="newRoomButton shadow">New Game</a>
+      <a href="#" class="newRoomButton shadow getActiveRooms">Active Games</a>
     </div>
+    <!-- <img src="./assets/homepageWallpaper.png" alt="home page wallpaper" id="homepage"> -->
     <!-- <div id="show">
       <a href="#" class="show">show div</a>
     </div> -->
@@ -65,7 +67,7 @@
                 const room =
                        `<div class="roomContainer">
                         <div class="roomName">
-                          <h5>Room ${i+1}: ${array[i].pop} / 5 </h5>
+                          <h5>Room ${i+1}:  ${array[i].pop} / 5 </h5>
 
                         </div>
 
@@ -84,22 +86,22 @@
 
 
 
-          // $(document).ready(function(){
+          $(document).ready(function(){
 
-          //   //if you wish to keep both the divs hidden by default then dont forget to hide //them
-          //   $(".hidden").hide();
-          //   // $("#about-content").hide();
+            //if you wish to keep both the divs hidden by default then dont forget to hide //them
+            $(".hidden").hide();
+            // $("#about-content").hide();
 
-          //  $(".show").click(function(){
-          //        // $("#help-content").hide();
-          //        $(".hidden").show();
-          //   });
+           $(".getActiveRooms").click(function(){
+                 // $("#help-content").hide();
+                 $(".hidden").toggle();
+            });
 
-          //  // $("#help-anchor").click(function(){
-          //  //      $("#help-content").show();
-          //  //       ("#about-content").hide();
-          //  // });
-          // });
+           // $("#help-anchor").click(function(){
+           //      $("#help-content").show();
+           //       ("#about-content").hide();
+           // });
+          });
 
         </script>
 

@@ -125,6 +125,17 @@ class ConnectionManager {
   //Listening to all important changes to local instance state to broadcast to server
   localStateListeners() {
 
+    //same listener name as the one below it, this is to make sure that other
+    //users see the scores of each other on the canvas,
+    // probably a better way of doing it but for now it gets the job done
+    this.localInstance.player.eventHandler.listen('score', state => {
+      this.send({
+        type: 'clientUpdate',
+        key: 'score',
+        state,
+      })
+    })
+
     //This could be refactored to avoid duplication. But for now I like seeing it clearly delineated
     this.localInstance.player.eventHandler.listen('score', state => {
       // console.log("connectionManager")

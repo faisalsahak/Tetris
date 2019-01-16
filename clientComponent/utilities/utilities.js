@@ -32,6 +32,6 @@ function cls(canvas) {
 function resizeCanvas(e) {
   const canvasArray = document.querySelectorAll(".gameCanvas");
   for (let i = 0; i < canvasArray.length; i++) {
-    canvasArray[i].style.height = (window.innerHeight * .45) + 'px';
+    // canvasArray[i].style.height = (window.innerHeight * .45) + 'px';
   }
 }

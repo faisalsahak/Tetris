@@ -18,20 +18,20 @@ span {
 }
 
 #flex-container-localRow {
-  z-index: 10;
-  height: 100%;
-  width:100%;
-  overflow: hidden;
+  z-index/*: 10;
+  height: 0%;
+  width:0%;*/
+/*  overflow: hidden;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: center;*/
 }
 /*TODO: double check when the server is running*/
 .textBox-left {
-  height: 95%;
-  width: 33%;
+  height: 0%;
+  width: 0%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,6 +110,8 @@ span {
 .mainGame {
   height: 95%;
   width: 0%;
+  position: absolute; /*/////////////////////////////*/
+  left: 500px; /*/////////////////////////////*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -127,26 +129,40 @@ span {
 
 
 #flex-container-remoteRow {
+  padding-left: 0px;
   height:100%;
-  width:100%;
+  width:40%;
+  position: relative;
+  left: 800px;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
 
 #remoteContainer {
-  height: 95%;
-  width: 98%;
+  height: 25%;
+  width: 100%;
+  left: 0px;
+  top: -125px;
+  position: relative;
   display: flex;
   flex-direction: row;
   overflow: hidden;
   align-items: center;
   justify-content: space-around;
   border-radius: 5px;
-  background-color: lightblue;
+  /*background-color: lightblue;*/
   box-shadow: inset 0px 0px 19px -1px rgba(0,0,0,0.4);
+}
+
+div#remoteContainer.remoteGames .gameCanvas{
+  height: 150px;
+  position: relative;
+  top: 15px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #localContainer .gameCanvas .shadowCanvas {
@@ -163,11 +179,12 @@ span {
 
 #scoresTable{
   border: 10px;
-  position: absolute;
-  float: right;
+  position: relative;
+  /*float: left;*/
   left: 100px;
+  /*top: -125px;*/
 }
 
-.player {
+/*.mainGame {
 
-}
+}*/

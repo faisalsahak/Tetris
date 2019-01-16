@@ -4,6 +4,12 @@ class ConnectionManager {
     this.peers = new Map;
     this.manager = manager;
     this.localInstance = this.manager.instances[0];
+    // this.localInstance.canvas.height = 200;
+    // this.manager.instances[0].canvas.clientHeight = 1900
+    // console.log(this.localInstance.canvas.width)
+    // console.log(this.localInstance.canvas.height)
+    // console.log(this.manager.instances[0].canvas.clientHeight)
+
     // this.socket = io.connect('http://localhost')
 
 // console.log(this.peers);
@@ -109,7 +115,9 @@ class ConnectionManager {
 
     //Have server broadcast state for new instances to overwrite defaults on initializing them
     const player = this.localInstance.player;
-
+    console.log("player")
+    console.log(player.ctx.canvas)
+    // player.ctx.canvas.height = player.ctx.canvas.height + 300
     player.eventHandler.emit('pauseStatus', this.localInstance.paused)
     player.eventHandler.emit('boardMatrix', player.board.matrix);
     player.eventHandler.emit('activePieceMatrix', player.activePiece.matrix);

@@ -221,6 +221,8 @@ drawGrids(el,gridSize,colCount,rowCount){
 
     // if (player.linesCleared) <- Could add handling only in this case for efficiency
     this.speedModifier = .8 - (this.player.level * 0.07);
+
+    // console.log("spead increasing")
   }
 
   // sendNamesToMap(name, score){

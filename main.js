@@ -210,7 +210,7 @@ function gameRoom (io, socket) {
       //when a new player joins and there are players playing in the room, then their scores will be displayed on the new users window
       if(keys.length >0){
         playerInfo.set(client.playerName, data.score)
-        console.log("greater")
+        // console.log("greater")
         mapToArr(); //moves the items from the map to the arrays, because the map cannot be sent over the network
         // io.sockets.emit('broadcast',{ keys: keys, values: values})
         sendScoreData(io);// sends the player name and scores to the user to display

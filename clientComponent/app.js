@@ -69,8 +69,8 @@ socket.on('broadcast', function(data){
                 // var el = document.createElement('li');
                 // el.innerHTML = data.keys[i] + " : "+ data.values[i] +"\n";
                 // scoreContainer.appendChild(el);
-                var userInfo =
-                    `<div><h5>${data.keys[i]} : ${data.values[i]===null?0 : data.values[i]}</h5></div>`
+                var userInfo = `<tr><td><h5>${data.keys[i]} </h5></td> <td><h5>${data.values[i] == null? 0: data.values[i]}</h5></td></tr> `
+                    // `<div><h5>${data.keys[i]} : ${data.values[i]===null?0 : data.values[i]}</h5></div>`
                     content+=userInfo;
 
 

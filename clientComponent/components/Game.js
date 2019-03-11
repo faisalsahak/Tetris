@@ -6,12 +6,20 @@ class Game {
     this.canvas = this.element.querySelector('.gameCanvas');
     this.canvas.width = props.CANVAS_WIDTH ;
     this.canvas.height = props.CANVAS_HEIGHT;
+
+    this.drawWebLink(props.element.baseURI);
+    // console.log("proppppsss   ",props.element.baseURI)
+    // this.socket = io.connect('http://localhost:9000');
     // this.canvas.width = 400;
     // this.canvas.height =580;
     // console.log(this.canvas.width);
     // console.log(this.canvas.height);
     // this.playerNameScores = new Map;
-
+// socket.on('roomId', function(data){
+//   console.log("GameRoooooom ", data)
+//   const roomAddress = document.getElementById('link');
+//   link.innerHTML = data.roomId;
+// })
     //  for the shadow canvas
     // this.shadowCanvas = document.getElementById('shadow_canvas');
     // // console.log(this.element)
@@ -53,6 +61,11 @@ class Game {
     this.run = this.run.bind(this);
 
 
+  }
+  //draws the sharable link to the screen for user to share with friends
+  drawWebLink(link){
+    const roomAddress = document.getElementById('link');
+    roomAddress.innerHTML = link;
   }
 
 
@@ -157,16 +170,68 @@ drawGrids(el,gridSize,colCount,rowCount){
   pause() {
     this.paused = !this.paused;
     this.player.eventHandler.emit('pauseStatus', this.paused)
+    // console.log(this.props/.colorScheme);
   }
 
 
   drawPaused() {
     let ctx = this.props.ctx;
     ctx.fillStyle = 'rgba(100,100,150, .85)';
-    ctx.fillRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE)
+    ctx.fillRect(1 * this.props.TILESIZE, 6 * this.props.TILESIZE, 10 * this.props.TILESIZE, 10 * this.props.TILESIZE)
     ctx.strokeStyle = 'white';
-    ctx.strokeRect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 4 * this.props.TILESIZE);
-    canvasText(ctx, 'PAUSED', 'ariel', '25px', 6 * this.props.TILESIZE, 10.5 * this.props.TILESIZE, 80, 'white', 'center')
+    ctx.strokeRect(1 * this.props.TILESIZE, 6 * this.props.TILESIZE, 10 * this.props.TILESIZE, 10 * this.props.TILESIZE);
+    canvasText(ctx, 'PAUSED', 'ariel', '25px', 6 * this.props.TILESIZE, 7.5 * this.props.TILESIZE, 80, 'white', 'center')
+
+    ctx.beginPath();
+    // ctx.rect(250, 350, 200, 100);
+    ctx.rect(1 * this.props.TILESIZE, 8 * this.props.TILESIZE, 10 * this.props.TILESIZE, 10 * this.props.TILESIZE);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = 'rgba(225,225,225,0.5)';
+    ctx.fillRect(25,72,32,32);
+    ctx.fill();
+    this.drawPausedComponents(ctx,'Resume', 4, 9.5);
+    this.drawPausedComponents(ctx,'Restart', 3.8, 11.5);
+    this.drawPausedComponents(ctx,'Quit', 3.1, 13.5);
+    this.canvasEvent();
+
+
+  }
+  //draws the pause menu items
+  drawPausedComponents(ctx,text, x, y){
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#000000';
+    ctx.stroke();
+    ctx.closePath();
+    ctx.font = '20pt Kremlin Pro Web';
+    ctx.fillStyle = '#000000';
+    ctx.fillText(text, x * this.props.TILESIZE, y * this.props.TILESIZE);
+  }
+
+  getMousePos(canvas, event) {
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
+  }
+
+  canvasEvent(){
+    this.canvas.addEventListener('click', function(evt) {
+    // var rect = this.canvas.getBoundingClientRect();
+    // var mousePos = this.getMousePos(this.canvas, evt);
+    console.log(evt.clientX + " " + evt.clientY);
+    const xPos = evt.clientX;
+    const yPos = evt.clientY;
+
+    if((xPos >= 260 && xPos<= 444) &&(yPos >= 265 && yPos <= 284))
+      console.log('on resume button')
+
+    // debugger;
+    // if (isInside(mousePos,rect)) {
+    //   alert('clicked inside rect');
+    // }else{
+    //   alert('clicked outside rect');
+    // }
+    }, false);
   }
 
 

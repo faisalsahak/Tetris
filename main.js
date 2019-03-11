@@ -103,6 +103,8 @@ function generateRandomId(len = 8) {
 //   return id;
 // }
 
+// var roomId = '';
+
 // creates a unique session id
 function createSession(id) {
   if(sessionsMap.has(id)){
@@ -111,6 +113,7 @@ function createSession(id) {
 
   const session = new Session(id);
   sessionsMap.set(id, session);
+  // roomId = id;
 
   return session;
 }
@@ -181,7 +184,6 @@ function gameRoom (io, socket) {
   //######## gameRoom Socket Logic ######################
 
     if(data.type === 'createSession'){
-      // console.log("player Createddddd")
       console.log("player is created with name:  "+client.playerName);
       playerInfo.set(client.playerName, data.score);
       mapToArr();
@@ -191,12 +193,14 @@ function gameRoom (io, socket) {
 
       const session = createSession(generateRandomId()); //could also just use socket id?
       session.join(client);
-
       client.send({
         type: 'sessionCreated',
         id: session.id,
       });
 
+      io.sockets.emit('roomId',{ roomId: session.id});
+
+      console.log("room address ", session.id)
       // playerInfo.set(client.playerName, data.score)
       // io.sockets.emit('broadcast',{ key: client.playerName, value: data.score})
     }

@@ -60,6 +60,7 @@ function handleKeydown(event) {
 }
 
 socket.on('broadcast', function(data){
+  // console.log("appjs roomId ",data.roomId);
   // console.log(JSON.parse(data.data));
   // console.log("from the app.js file");
   var scoreContainer = document.getElementById('scoresTableList');
@@ -77,6 +78,8 @@ socket.on('broadcast', function(data){
               }
               scoreContainer.innerHTML = content;
 })
+
+
 
 // socket.on('nameScore', function(data){
 //   var scoreContainer = document.getElementById('scoresTable');

@@ -218,6 +218,13 @@ td {
   height: 10px;
 }
 
+h3{
+  color: #eee,
+  display: flex,
+  align-items: center,
+  justify-content: center,
+}
+
 /*.mainGame {
 
 }*/

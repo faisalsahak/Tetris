@@ -8,6 +8,7 @@ class Manager {
     this.remoteContainer = document.getElementById('remoteContainer');
 
     this.instances = [];
+    this.colorSchemeIndex = 3;
     // console.log(this.document)
   }
 
@@ -61,7 +62,7 @@ class Manager {
     // console.log("new Player has joinnnnneeeeeeed")
     const element = document.importNode(this.template.content, true)
                    .children[0];
-    const game = new Game(this.createPropsBundle(element, 3)); //need to dynamically change index later for color change
+    const game = new Game(this.createPropsBundle(element, this.colorSchemeIndex)); //need to dynamically change index later for color change
     //Add Game Instance to row based on whether or not is the local instance
     // console.log(game)
     var playerCounter = this.instances.length + 1;

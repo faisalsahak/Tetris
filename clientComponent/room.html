@@ -3,13 +3,26 @@
 <head>
   <title>Game Room</title>
   <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="room.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" type="text/css" href="room.css">
 </head>
 <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
 <body>
   <h3 id="shareLink">Share this link to play with friends: <span id="link"></span> </h3>
+
+  <script>
+    var socket = io.connect();
+    // $( document ).ready(function() {
+    // console.log( "ready!" );
+     socket.on('roomId',function(data) {
+      var linkRef = document.getElementById('link');
+      linkRef.innerHTML = "http://localhost:9000/room#"+data.roomId;
+      console.log("from rooom ", data.roomId)
+     })
+  // });
+
+  </script>
 <!--   <script >
 
     var socket = io.connect();

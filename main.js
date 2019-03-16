@@ -41,7 +41,9 @@ io.on('connection', (socket) => {
 });
 
 
-server.listen(port);
+server.listen(port, function(){
+	console.log("server running on port "+port)
+});
 
 
 //this function converts the info from 'map' into array of objects that are to be rendered on to the screen as room choices
@@ -206,6 +208,7 @@ function gameRoom (io, socket) {
     }
 
     else if (data.type === 'joinSession') {
+      // console.log('Main.js ', data)
       // numOfClients+=1;
       // console.log('Client joined session')/////////////////////////////////////////
 
@@ -226,6 +229,7 @@ function gameRoom (io, socket) {
     }
 
     else if (data.type === 'clientUpdate') {
+      console.log("mainjs ", data.score)
       //Receive state updates from clients
       client.state[data.key] = data.state;
       client.broadcast(data)

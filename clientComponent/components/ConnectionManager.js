@@ -121,6 +121,7 @@ class ConnectionManager {
     player.eventHandler.emit('pauseStatus', this.localInstance.paused)
     player.eventHandler.emit('boardMatrix', player.board.matrix);
     player.eventHandler.emit('activePieceMatrix', player.activePiece.matrix);
+    // player.eventHandler.emit('activePieceMatrix', player.score);
     player.eventHandler.emit('nextPieceMatrix', player.nextPiece.matrix);
     player.eventHandler.emit('score', player.score);
     player.eventHandler.emit('linesCleared', player.linesCleared);
@@ -177,6 +178,7 @@ class ConnectionManager {
       this.send({
         type: 'clientUpdate',
         key: 'activePiecePos',
+        score: this.localInstance.player.score,
         state,
       })
     })

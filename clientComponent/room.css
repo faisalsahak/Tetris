@@ -172,17 +172,17 @@ div#remoteContainer.remoteGames .gameCanvas{
 #remoteContainer .gameCanvas .shadowCanvas {
   height: 100%;
   top: 100px;
-  display: block;
+  /*display: block;*/
   margin: auto;
   border: 5px solid black;
+  position: fixed
 }
 
 #scoresTable{
   border: 10px;
-  position: absolute;
+  position: relative;
   float: left;
-  left: 100px;
-  top: 175px;
+  /*display: inline;*/
 }
 
 table {
@@ -191,6 +191,9 @@ table {
   border-collapse: collapse;
   width: 130px;
   border: 0.5px solid black;
+  position: relative;
+  left: 100px;
+  top: 175px;
   /*top: 100px;*/
 }
 
@@ -219,11 +222,27 @@ td {
 }
 
 h3{
-  color: #eee,
-  display: flex,
-  align-items: center,
-  justify-content: center,
+  /*top:50;*/
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
 }
+
+#shareLink{
+  position: absolute;
+  display: inline;
+  top: 75px;
+  left: 130px;
+/*  top: 343/*;
+
+  /*font-size: 55*/
+}
+
+/*h3 #sharelink{
+  font-size: 50
+}*/
 
 /*.mainGame {
 

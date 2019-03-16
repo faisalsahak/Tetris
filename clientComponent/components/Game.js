@@ -7,7 +7,8 @@ class Game {
     this.canvas.width = props.CANVAS_WIDTH ;
     this.canvas.height = props.CANVAS_HEIGHT;
 
-    this.drawWebLink(props.element.baseURI);
+    console.log(props)
+
     // console.log("proppppsss   ",props.element.baseURI)
     // this.socket = io.connect('http://localhost:9000');
     // this.canvas.width = 400;
@@ -61,6 +62,9 @@ class Game {
     this.run = this.run.bind(this);
 
 
+    this.drawWebLink(this.props.element.baseURI); //makes a call to draw the sharable link to the user
+
+
   }
   //draws the sharable link to the screen for user to share with friends
   drawWebLink(link){
@@ -70,14 +74,15 @@ class Game {
 
 
   drawGameBG() {
+    
     // console.log(outline)
     // console.log(this.player)
     let ctx = this.props.ctx;
     //This is the Sidebar color
-    ctx.fillStyle = 'rgba(175,150,200, .3)';
+    ctx.fillStyle = '#595656'
     ctx.fillRect(0,0, this.props.CANVAS_WIDTH, this.props.CANVAS_HEIGHT);
     //Playing area black
-    ctx.fillStyle = '#2f2f2f';
+    ctx.fillStyle = 'black';
     ctx.fillRect(0,0, this.props.BOARD_WIDTH * this.props.TILESIZE + 2, this.props.BOARD_HEIGHT * this.props.TILESIZE);
     //Border of playing area
     ctx.strokeStyle = 'white';
@@ -91,16 +96,14 @@ class Game {
     // ctx.fillStyle = 'rgba(100,100,150, .5)';
     // ctx.fillRect(this.props.TILESIZE * this.props.BOARD_WIDTH + 30, 100, 190, 190);
 
-    canvasText(this.ctx, 'SCORE', 'ariel', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 220, 80,'yellow', 'center')
-    canvasText(this.ctx, this.player.score, 'ariel', '20px', ((this.player.board.width * this.player.board.tileSize) + 60), 250, 80,'white', 'center')
-    canvasText(this.ctx, 'LINES', 'ariel', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 290, 80, 'yellow', 'center')
-    canvasText(this.ctx, this.player.linesCleared, 'ariel', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 320, 80,'white', 'center')
-    canvasText(this.ctx, 'LEVEL', 'ariel', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 360, 80,'yellow', 'center')
-    canvasText(this.ctx, this.player.level + 1, 'ariel', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 390, 80,'white', 'center')
+    canvasText(this.ctx, 'SCORE', 'Courier New', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 220, 80,'white', 'center')
+    canvasText(this.ctx, this.player.score, 'Courier New', '20px', ((this.player.board.width * this.player.board.tileSize) + 60), 250, 80,'white', 'center')
+    canvasText(this.ctx, 'LINES', 'Courier New', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 290, 80, 'white', 'center')
+    canvasText(this.ctx, this.player.linesCleared, 'Courier New', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 320, 80,'white', 'center')
+    canvasText(this.ctx, 'LEVEL', 'Courier New', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 360, 80,'white', 'center')
+    canvasText(this.ctx, this.player.level + 1, 'Courier New', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 390, 80,'white', 'center')
     // console.log(((this.player.board.width * this.player.board.tileSize) + 60));
     // console.log("called");
-
-
 
   }
 
@@ -180,7 +183,7 @@ drawGrids(el,gridSize,colCount,rowCount){
     ctx.fillRect(1 * this.props.TILESIZE, 6 * this.props.TILESIZE, 10 * this.props.TILESIZE, 10 * this.props.TILESIZE)
     ctx.strokeStyle = 'white';
     ctx.strokeRect(1 * this.props.TILESIZE, 6 * this.props.TILESIZE, 10 * this.props.TILESIZE, 10 * this.props.TILESIZE);
-    canvasText(ctx, 'PAUSED', 'ariel', '25px', 6 * this.props.TILESIZE, 7.5 * this.props.TILESIZE, 80, 'white', 'center')
+    canvasText(ctx, 'PAUSED', 'Courier New', '25px', 6 * this.props.TILESIZE, 7.5 * this.props.TILESIZE, 80, 'white', 'center')
 
     ctx.beginPath();
     // ctx.rect(250, 350, 200, 100);

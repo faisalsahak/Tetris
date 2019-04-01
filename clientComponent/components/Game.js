@@ -96,14 +96,15 @@ class Game {
     // ctx.fillStyle = 'rgba(100,100,150, .5)';
     // ctx.fillRect(this.props.TILESIZE * this.props.BOARD_WIDTH + 30, 100, 190, 190);
 
-    canvasText(this.ctx, 'SCORE', 'Courier New', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 220, 80,'white', 'center')
-    canvasText(this.ctx, this.player.score, 'Courier New', '20px', ((this.player.board.width * this.player.board.tileSize) + 60), 250, 80,'white', 'center')
-    canvasText(this.ctx, 'LINES', 'Courier New', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 290, 80, 'white', 'center')
-    canvasText(this.ctx, this.player.linesCleared, 'Courier New', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 320, 80,'white', 'center')
-    canvasText(this.ctx, 'LEVEL', 'Courier New', '25px', ((this.player.board.width * this.player.board.tileSize) + 60), 360, 80,'white', 'center')
-    canvasText(this.ctx, this.player.level + 1, 'Courier New', '20px', ((this.player.board.width * this.player.board.tileSize) +60), 390, 80,'white', 'center')
+    canvasText(this.ctx, 'SCORE', 'Courier New', '17px', ((this.player.board.width * this.player.board.tileSize) + 60), 200, 80,'white', 'center')
+    canvasText(this.ctx, this.player.score, 'Courier New', '15px', ((this.player.board.width * this.player.board.tileSize) + 60), 220, 80,'white', 'center')
+    canvasText(this.ctx, 'LINES', 'Courier New', '17px', ((this.player.board.width * this.player.board.tileSize) + 60), 245, 80, 'white', 'center')
+    canvasText(this.ctx, this.player.linesCleared, 'Courier New', '15px', ((this.player.board.width * this.player.board.tileSize) +60), 270, 80,'white', 'center')
+    canvasText(this.ctx, 'LEVEL', 'Courier New', '17px', ((this.player.board.width * this.player.board.tileSize) + 60), 295, 80,'white', 'center')
+    canvasText(this.ctx, this.player.level + 1, 'Courier New', '15px', ((this.player.board.width * this.player.board.tileSize) +60), 320, 80,'white', 'center')
+    canvasText(this.ctx, 'SPEED', 'Courier New', '17px', ((this.player.board.width * this.player.board.tileSize) + 60), 345, 80,'white', 'center')
+    canvasText(this.ctx, this.player.levelSpeed, 'Courier New', '15px', ((this.player.board.width * this.player.board.tileSize) +60), 370, 80,'white', 'center')
     // console.log(((this.player.board.width * this.player.board.tileSize) + 60));
-    // console.log("called");
 
   }
 
@@ -286,9 +287,9 @@ drawGrids(el,gridSize,colCount,rowCount){
   }
 
   updateDropInterval() {
-
     // if (player.linesCleared) <- Could add handling only in this case for efficiency
     this.speedModifier = .8 - (this.player.level * 0.07);
+
 
     // console.log("spead increasing")
   }
@@ -299,8 +300,6 @@ drawGrids(el,gridSize,colCount,rowCount){
   // }
 
   sendLocalState() {
-        // console.log(this.player.score);
-
     // console.log("ff")
     //Send local state to server to broadcast to all other players
     // this.sendNamesToMap(this.player.playerName, this.player.score)

@@ -33,7 +33,9 @@ class Player {
 
     this.spaceSound =  new Audio('../sounds/spacePressed.mp3');
     this.rowCleared =  new Audio('../sounds/rowClear.mp3');
-    this.leftRightPressed = new Audio('../sounds/arrowButtons.mp3')
+    this.leftRightPressed = new Audio('../sounds/arrowButtons.mp3');
+
+    this.levelSpeed = 1;
 
     // this.ghostPiece = this.activePiece;
     // this.ghostPiece.pos.x = this.activePiece.pos.x;
@@ -305,6 +307,10 @@ generateRandomId(len = 2) {
         //The one thing to note is that if the previous clear was a tetris and this one was as well, the multiplier is even higher
         const multiplier = completedLines === 1 ? 40 : completedLines === 2 ? 100 : completedLines === 3 ? 300 : this.lastClearHeight === 4 ? 1800 : 1200;
         const points = multiplier * (this.level + 1)
+
+        // this.levelSpeed = Math.ceil((this.linesCleared /20)+this.levelSpeed);
+        if(this.linesCleared % 15 ===0)
+          this.levelSpeed++;
         return this.score + points;
     }
 

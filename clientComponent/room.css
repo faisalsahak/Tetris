@@ -351,6 +351,24 @@ h1 {
 
 
 
+#logo{
+  width: 90px;
+  height: 90px;
+  margin-left: 10px;
+  margin-top: 5px;
+  z-index: 90;
+  position: fixed
+
+
+}
+
+
+
+
+
+
+
+
 
 
 

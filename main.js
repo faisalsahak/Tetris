@@ -5,7 +5,7 @@ const io = require('socket.io')(server);
 const path = require('path');
 const Session = require('./gameComponent/Session');
 const Client = require('./gameComponent/Client');
-const port = 9000; //development port
+const port = 8080; //development port
 // const port = process.env.PORT; //PRODUCTION
 
 

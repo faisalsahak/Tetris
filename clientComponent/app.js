@@ -2,7 +2,8 @@ const manager = new Manager(document, true);
 const playerLocal = manager.createPlayer(true);
 playerLocal.element.classList.add('local');
 playerLocal.run();
-var socket = io.connect('http://localhost:9000');
+// var socket = io.connect('http://localhost:9000');
+var socket = io.connect('http://www.blocksbattle.com');
 
 const connectionManager = new ConnectionManager(manager);
 

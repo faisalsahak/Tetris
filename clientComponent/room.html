@@ -6,9 +6,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <link rel="stylesheet" type="text/css" href="room.css">
+    <!-- FavIcon -->
+  <link rel="shortcut icon" href="./assets/favicon.ico" />
 </head>
 <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
 <body>
+  <a href="/">
+    <img id="logo" src="./assets/favicon.ico">
+  </a>
+
   <h3 id="shareLink">Share this link to play with friends:<br/> <span id="link"></span> </h3>
 
   <script>
@@ -17,7 +23,7 @@
     // console.log( "ready!" );
      socket.on('roomId',function(data) {
       var linkRef = document.getElementById('link');
-      linkRef.innerHTML = "http://localhost:9000/room#"+data.roomId;
+      linkRef.innerHTML = "http://blocksbattle.com/room#"+data.roomId;
       console.log("from rooom ", data.roomId)
      })
   // });

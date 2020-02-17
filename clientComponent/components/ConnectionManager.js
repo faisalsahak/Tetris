@@ -282,5 +282,37 @@ class ConnectionManager {
   //Update local copies of remote instances with state changes.
   updatePeer(data) {
     // console.log("updating")
+    // console.log(this.localInstance.player.score);
+        if (!this.peers.has(data.clientId)) {
+            throw new Error('Client does not exist', data.clientId);
+        }
 
+        const game = this.peers.get(data.clientId);
+        const player = game.player;
+
+        if (data.key === 'activePieceMatrix') {
+          player.activePiece.matrix = data.state;
+        }
+        else if (data.key === 'activePiecePos') {
+          player.activePiece.pos = data.state;
+        }
+        else if (data.key === 'nextPieceMatrix') {
+          player.nextPiece.matrix = data.state;
+        }
+        else if (data.key === 'boardMatrix') {
+          player.board.matrix = data.state;
+        }
+        else if (data.key === 'score') {
+          player.setScore(data.state);
+        }
+        else if (data.key === 'linesCleared') {
+          player.setLines(data.state);
+        }
+        else if (data.key === 'level') {
+          player.level = data.state;
+        }
+        else if (data.key === 'pauseStatus') {
+          game.paused = data.state;
+        }
+  }
 }
